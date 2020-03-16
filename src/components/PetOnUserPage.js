@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
+import { v4 as uuidv4 } from 'uuid';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -42,9 +43,9 @@ export default function PetOnUserPage(props) {
   const classes = useStyles();
   const allPets = props.petData.map(pet => {
     return(
-      <div>
+      <div key={uuidv4()} >
       <Card >
-      <li key={pet.pet} className={classes.root} >
+      <li className={classes.root} >
         <Link to={`/pets/${pet.pet_id}`} ><img className={classes.imgStyle} alt={pet.pet} src={pet.pet_avatar} /></Link>
         <h1 className={classes.fontStyle}> {pet.pet} </h1>
         {/* <em className={classes.fontStyle}>{pet.pet}</em> */}

@@ -19,6 +19,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText } from '@material-ui/core';
+
 export default function App() {
  const [userId, setUserId] = useState(undefined)
 
@@ -172,7 +173,7 @@ const acceptFriendRequest = function(userId, receiver_id, status) {
 // Pets with no connections (PENDING, ACCEPTED, DECLINED)
 function DogsNearby(props) {
   const classes = useStyles();
-  const [dogsNearby, setDogsNearby] = useState([])
+  const [dogsNearby, setDogsNearby] = useState("")
   const [currentDogIndex, setCurrentDogIndex] = useState(0)
   
   useEffect(()=> {
@@ -236,8 +237,11 @@ function Profile(props) {
   const [pet, setPet] = useState({})
   const [open, setOpen] = useState(false)
 
+
+  
   const addNewPet = function(name, age, breed, quirky_fact, userId, profile_photo) {
     const newPet = { name, age, breed, quirky_fact, owner_id: userId, profile_photo }
+    
     axios.post('api/pets', newPet)
     .then(res => {
       console.log("Added a new pet: ", res.config.data)

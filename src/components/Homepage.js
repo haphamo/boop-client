@@ -126,7 +126,8 @@ export default function Homepage (props) {
  let userLogin = function () {
    axios.post(`/login`, {email, password}, { withCredentials: true})
    .then(res => {
-      props.onLogin(res.data.userId)
+      props.onLogin(res.data.userId, res.data.loggedIn)
+      
    })
  }
  // handles register
