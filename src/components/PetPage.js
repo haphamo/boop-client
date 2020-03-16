@@ -75,7 +75,7 @@ export default function PetPage(props) {
       console.error(err)
     })
     
-  }, [lastUploaded, id])
+  }, [lastUploaded, addFav, props.userId, id])
 
   const submitPetFav = function(favourite_item, category) {
     const newFav = { favourite_item, category, id }

@@ -9,7 +9,7 @@ const infoBox = {
   'textAlign': 'center'
 }
 export default function PetInfoDashboard(props) {
-  console.log(props)
+  // console.log(props)
   return (
     <Paper >
     <br></br>

@@ -27,6 +27,7 @@
     "sass": "^1.23.7",
     "serialize-javascript": "^2.1.2",
     "uploadcare-widget": "^3.8.0",
+    "uuid": "^7.0.2",
     "video-react": "^0.14.1"
   },
   "scripts": {
