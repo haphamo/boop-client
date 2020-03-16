@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-
 import {
   BrowserRouter as Router,
   Switch,
@@ -7,20 +6,19 @@ import {
   Link
 } from "react-router-dom";
 import axios from "axios";
-
 import './App.scss';
 import BottomNav from './components/BottomNav';
-import PetsIcon from '@material-ui/icons/Pets';
 import PetPage from './components/PetPage';
 import PetForm from './components/PetForm';
 import UserProfile from './components/UserProfile';
 import PetProfilePhoto from './components/PetProfilePhoto';
 import PetInfoDashboard from './components/petInfoDashboard';
-
+import Homepage from './components/Homepage';
+import PetsIcon from '@material-ui/icons/Pets';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import Homepage from './components/Homepage';
-
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText } from '@material-ui/core';
 export default function App() {
  const [userId, setUserId] = useState(undefined)
 
