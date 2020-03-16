@@ -28,6 +28,16 @@ export default function App() {
   setUserId(id)
  }
 
+   // When user clicks the logout button, set the id back to undefined and redirect to the landing page
+  const handleLogout = function() {
+    axios.post('/logout')
+    .then(res => {
+      if(res.data.loggedOut) {
+        setUserId(undefined)
+      }
+    })
+  }
+
   return (
     <Router>
       <div>
@@ -38,7 +48,7 @@ export default function App() {
             /> : <Homepage onLogin={handleLogin} />} 
           </Route>
           <Route path="/profile">
-            <Profile userId={userId}/>
+            <Profile userId={userId} onLogout={handleLogout}/>
           </Route>
           <Route path="/friends">
             <Friends userId={userId}/>
@@ -226,6 +236,7 @@ function Profile(props) {
   const classes = useStyles();
   const [showForm, setShowForm] = useState(false)
   const [pet, setPet] = useState({})
+  const [open, setOpen] = useState(false)
 
   const addNewPet = function(name, age, breed, quirky_fact, userId, profile_photo) {
     const newPet = { name, age, breed, quirky_fact, owner_id: userId, profile_photo }
@@ -240,22 +251,43 @@ function Profile(props) {
     })
   }
 
-  // const handleCreatePet = function(){
-  //   setShowForm(false)
-  //   axios.get(`/api/users/${props.userId}/pets`)
-  //   .then(res => {
-  //     // console.log('this one', res)
-  //     // setPet({...pet, res.data.result})
-  //   })
-  //   .catch(err => {
-  //     console.error(err)
-  //   })
-  // }
+  // Handles open/close of pop-up dialogue box for logging out
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   return (
     <div className={classes.marginBottom}>
       <div className={ classes.profileStyles }>
-        <PetsIcon className={ classes.hidden }/>
+        <div>
+          <ExitToAppIcon onClick={handleClickOpen} />
+          <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure you want to log out from Boop?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={()=> props.onLogout()} color="primary" autoFocus>
+                <Link to ="/">
+                  Logout
+                </Link>
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
         <h2 className={classes.header}>My Profile</h2>
         <PetsIcon onClick={()=> setShowForm(true)}/>
       </div>
